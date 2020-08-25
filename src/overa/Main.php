@@ -85,7 +85,7 @@ public function onJoinPlayer(PlayerJoinEvent $event){
 	$player->addSubTitle("§c Noctalia");
 	
 
-   $player->getInventory()->setItem(0, Item::get(369)->setCustomName("§r§aProfile"));
+   $player->getInventory()->setItem(0, Item::get(381)->setCustomName("§r§aProfile"));
    $player->getInventory()->setItem(2, Item::get(341)->setCustomName("§r§eLobby"));
    $player->getInventory()->setItem(4, Item::get(345)->setCustomName("§r§6Compass"));
    $player->getInventory()->setItem(8, Item::get(130)->setCustomName("§r§5Cosmetics"));
@@ -135,6 +135,12 @@ public function onInteract(PlayerInteractEvent $ev){
 	if ($player->getInventory()->getItemInHand()->getId() === 130){
 		
 		$this->form($player);
+	
+	}
+	
+	if ($player->getInventory()->getItemInHand()->getId() === 381){
+		
+		$this->Profile($player);
 	
 	}
 
@@ -281,6 +287,40 @@ public function Speed($player){
 
     }
 
+public function Profile($player){
+
+        $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+	$form = $api->createSimpleForm(function (Player $player, int $data = null) {
+            $result = $data; 
+            if ($result === null) {
+                return true;
+            }
+            switch ($result) {
+		    
+		    case 0:
+                        $player->sendMessage("Réponse 1");
+                    break;
+           
+		    case 1:
+                        $player->sendMessage("Réponse 2");
+                    break;	    
+                
+		    case 2:
+                        $player->sendMessage("Réponse 3");
+                    break;
+            }
+        });
+        $form->setTitle("§r§5Profile");
+        $form->addButton("§l§6In Dev 1");
+        $form->addButton("§l§2In Dev 2");
+        $form->addButton("§l§dIn Dev 3");
+	$form->addButton("§4§lEXIT");
+        $form->sendToPlayer($player);
+	    return $form;
+
+    }	
+	
+	
 	
 	
 }
