@@ -9,6 +9,8 @@ use pocketmine\Server;
 use pocketmine\plugin\RegisteredListener;
 	
 use pocketmine\scheduler\Task;
+use pocketmine\scheduler\PluginTask;
+
 
 
 use pocketmine\plugin\PluginBase;
@@ -21,6 +23,7 @@ use jojoe77777\FormAPI\CustomForm;
 use jojoe77777\FormAPI\SimpleForm;
 use jojoe77777\FormAPI\Form;
 use jojoe77777\FormAPI\ModalForm;
+
 
 use pocketmine\item\Item;
 
@@ -56,6 +59,15 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDeathEvent;
 
+
+use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\DoubleTag;
+use pocketmine\nbt\tag\FloatTag;
+use pocketmine\nbt\tag\ListTag;
+
+use pocketmine\entity\PrimedTNT;
+use pocketmine\event\entity\EntityExplodeEvent;
+
 class Main extends PluginBase implements Listener{
 
 
@@ -63,6 +75,8 @@ public function onEnable(){
 	$this->getLogger()->info("Lobby Plugin has been actived");
 	
 	$this->getServer()->getPluginManager()->registerEvents($this , $this);
+	
+	$this->getServer()->getScheduler()->scheduleRepeatingTask(new CooldownTask($this), 20);
 }
 
 
@@ -155,7 +169,7 @@ public function onInteract(PlayerInteractEvent $ev){
 		
 		$player->getInventory()->clearAll();
 		$player->getInventory()->setItem(0, Item::get(288)->setCustomName("§r§bBird Knockback"));
-		$player->getInventory()->setItem(1, Item::get(165)->setCustomName("§r§6Soon"));
+		$player->getInventory()->setItem(1, Item::get(46)->setCustomName("§r§6Throw TNT"));
 		$player->getInventory()->setItem(8, Item::get(401)->setCustomName("§r§cRetour"));
 		
 	}
@@ -183,13 +197,49 @@ public function onInteract(PlayerInteractEvent $ev){
 				$level->addParticle(new FlameParticle(new Vector3($x, $y, $z-0.3)));
 				$level->addParticle(new FlameParticle(new Vector3($x+0.3, $y, $z)));
 				$level->addParticle(new FlameParticle(new Vector3($x, $y, $z+0.3)));			
-			$player->knockBack($player, 0, $dx, $dz, 0.5);
+			$player->knockBack($player, 0, $dx, $dz, 1);
 		}
 	
+	
+		if ($player->getInventory()->getItemInHand()->getId() === 46){
+		
+			if(!isset($this->tntCooldown[$player->getName()])){
+                $nbt = new CompoundTag("", [
+                    "Pos" => new ListTag("Pos", [
+                        new DoubleTag("", $player->x),
+                        new DoubleTag("", $player->y + $player->getEyeHeight()),
+                        new DoubleTag("", $player->z)
+                    ]),
+                    "Motion" => new ListTag("Motion", [
+                        new DoubleTag("", -sin($player->yaw / 180 * M_PI) * cos($player->pitch / 180 * M_PI)),
+                        new DoubleTag("", -sin($player->pitch / 180 * M_PI)),
+                        new DoubleTag("", cos($player->yaw / 180 * M_PI) * cos($player->pitch / 180 * M_PI))
+                    ]),
+                    "Rotation" => new ListTag("Rotation", [
+                        new FloatTag("", $player->yaw),
+                        new FloatTag("", $player->pitch)
+                    ]),
+                ]);
+                $tnt = Entity::createEntity("PrimedTNT", $player->getLevel(), $nbt, null);
+                $tnt->setMotion($tnt->getMotion()->multiply(2));
+                $tnt->spawnTo($player);
+                $this->tntCooldown[$player->getName()] = $player->getName();
+                $time = "60";
+                $this->tntCooldownTime[$player->getName()] = $time;
+            }else{
+                $player->sendMessage("§cYou can't use your gun for another ".$this->tntCooldownTime[$player->getName()]." seconds.");
+            }
+        }	
+		
 
 }
 	
-	
+    public function onEntityExplode(EntityExplodeEvent $event){
+        $entity = $event->getEntity();
+        if($entity instanceof PrimedTNT){
+            $event->setCancelled();
+        }
+    }	
 
 
     public function form($player){
@@ -366,4 +416,25 @@ public function Profile($player){
 	
 	
 	
+}
+
+
+class CooldownTask extends PluginTask{
+
+    public function __construct($plugin){
+        $this->plugin = $plugin;
+        parent::__construct($plugin);
+    }
+  
+    public function onRun($tick){
+        foreach($this->plugin->tntCooldown as $player){
+	    if($this->plugin->tntCooldownTime[$player] <= 0){
+	        unset($this->plugin->tntCooldown[$player]);
+	        unset($this->plugin->tntCooldownTime[$player]);
+	    }else{
+	        $this->plugin->tntCooldownTime[$player]--;
+	    }
+        }
+    }
+
 }
