@@ -171,7 +171,6 @@ public function onInteract(PlayerInteractEvent $ev){
 	}
 
 	if ($player->getInventory()->getItemInHand()->getId() === 288){
-		$player = $event->getPlayer();
 		$x = $player->getX();
 		$y = $player->getY();
 		$z = $player->getZ();
