@@ -86,7 +86,7 @@ public function onJoinPlayer(PlayerJoinEvent $event){
 	
 
    $player->getInventory()->setItem(0, Item::get(381)->setCustomName("§r§aProfile"));
-   $player->getInventory()->setItem(2, Item::get(341)->setCustomName("§r§eLobby"));
+   $player->getInventory()->setItem(2, Item::get(341)->setCustomName("§r§dGadget"));
    $player->getInventory()->setItem(4, Item::get(345)->setCustomName("§r§6Compass"));
    $player->getInventory()->setItem(8, Item::get(130)->setCustomName("§r§5Cosmetics"));
    $player->getInventory()->setItem(6, Item::get(399)->setCustomName("§r§aInfo"));
@@ -143,6 +143,27 @@ public function onInteract(PlayerInteractEvent $ev){
 		$this->Profile($player);
 	
 	}
+	
+	if ($player->getInventory()->getItemInHand()->getId() === 341){
+		
+		
+		$player->getInventory()->clearAll();
+		$player->getInventory()->setItem(0, Item::get(288)->setCustomName("§r§aBird Knockback"));
+		$player->getInventory()->setItem(1, Item::get(165)->setCustomName("§r§aJumpBoost"));
+		$player->getInventory()->setItem(8, Item::get(351:1)->setCustomName("§r§aRetoure"));
+		
+	}
+	
+	if ($player->getInventory()->getItemInHand()->getId() === 351:1){
+		
+		$player->getInventory()->clearAll();
+		$player->getInventory()->setItem(0, Item::get(381)->setCustomName("§r§aProfile"));
+   $player->getInventory()->setItem(2, Item::get(341)->setCustomName("§r§dGadget"));
+   $player->getInventory()->setItem(4, Item::get(345)->setCustomName("§r§6Compass"));
+   $player->getInventory()->setItem(8, Item::get(130)->setCustomName("§r§5Cosmetics"));
+   $player->getInventory()->setItem(6, Item::get(399)->setCustomName("§r§aInfo"));
+	}
+
 
 }
 	
