@@ -43,6 +43,8 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\Listener;
 
+use pocketmine\entity\Effect;
+
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDeathEvent;
@@ -159,7 +161,7 @@ public function onInteract(PlayerInteractEvent $ev){
                     break;	    
                 
 		    case 2:
-                        $player->Speed($player);
+                        $this->Speed($player);
                     break;
             }
         });
