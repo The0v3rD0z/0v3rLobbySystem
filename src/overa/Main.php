@@ -150,11 +150,11 @@ public function onInteract(PlayerInteractEvent $ev){
 		$player->getInventory()->clearAll();
 		$player->getInventory()->setItem(0, Item::get(288)->setCustomName("§r§aBird Knockback"));
 		$player->getInventory()->setItem(1, Item::get(165)->setCustomName("§r§aJumpBoost"));
-		$player->getInventory()->setItem(8, Item::get(351, 1, 1)->setCustomName("§r§aRetoure"));
+		$player->getInventory()->setItem(8, Item::get(351. 1. 1)->setCustomName("§r§aRetoure"));
 		
 	}
 	
-	if ($player->getInventory()->getItemInHand()->getId() === 351, 1, 1){
+	if ($player->getInventory()->getItemInHand()->getId() === 351. 1. 1){
 		
 		$player->getInventory()->clearAll();
 		$player->getInventory()->setItem(0, Item::get(381)->setCustomName("§r§aProfile"));
