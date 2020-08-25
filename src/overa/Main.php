@@ -159,7 +159,7 @@ public function onInteract(PlayerInteractEvent $ev){
                     break;	    
                 
 		    case 2:
-                        $player->sendMessage("§cSPEED");
+                        $player->Speed($player);
                     break;
             }
         });
@@ -185,18 +185,20 @@ public function Fly($player){
 		    
 		    case 0:
                         $player->setAllowFlight(true);
+			    $player->sendMessage("§7Vous avez §l§aActivé §r§7votre Fly");
                     break;
 		       
 		    case 1:
                         $player->setAllowFlight(false);
 			$player->setFlying(false);
+			    $player->sendMessage("§7Vous avez §l§cDésactivé §r§7votre Fly");
                     break;	    
                 
             }
         });
         $form->setTitle("§r§5Cosmetics Fly");
         $form->addButton("§l§aFly ON");
-        $form->addButton("§l§cFLY OFF");
+        $form->addButton("§l§cFly OFF");
 	$form->addButton("§4§lEXIT");
         $form->sendToPlayer($player);
 	    return $form;
@@ -241,6 +243,40 @@ public function Size($player){
 
 
 }
+	
+
+	
+public function Speed($player){
+
+        $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+	$form = $api->createSimpleForm(function (Player $player, int $data = null) {
+            $result = $data; 
+            if ($result === null) {
+                return true;
+            }
+            switch ($result) {
+		    
+		    case 0:
+                            $effect = new EffectInstance(Effect::getEffect(1), 999999999, 3, false);
+			    $player->addEffect($effect);
+			    $player->sendMessage("§7Vous avez §l§a Activé §r§7 votre speed");
+                    break;
+		       
+		    case 1:
+                            $player->removeAllEffects();
+			    $player->sendMessage("§7Vous avez §l§c Désactivé §r§7 votre speed");
+                    break;	    
+                
+            }
+        });
+        $form->setTitle("§r§5Cosmetics Speed");
+        $form->addButton("§l§aSpeed ON");
+        $form->addButton("§l§cSpeed OFF");
+	$form->addButton("§4§lEXIT");
+        $form->sendToPlayer($player);
+	    return $form;
+
+    }
 
 	
 	
