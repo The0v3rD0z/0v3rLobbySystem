@@ -70,7 +70,10 @@ use pocketmine\event\entity\EntityExplodeEvent;
 
 class Main extends PluginBase implements Listener{
 
+public $tntCooldown = [ ];
+public $tntCooldownTime = [ ];
 
+	
 public function onEnable(){
 	$this->getLogger()->info("Lobby Plugin has been actived");
 	
