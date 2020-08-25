@@ -183,7 +183,7 @@ public function onInteract(PlayerInteractEvent $ev){
 				$level->addParticle(new FlameParticle(new Vector3($x, $y, $z-0.3)));
 				$level->addParticle(new FlameParticle(new Vector3($x+0.3, $y, $z)));
 				$level->addParticle(new FlameParticle(new Vector3($x, $y, $z+0.3)));			
-			$player->knockBack($player, 0, $dx, $dz, 3);
+			$player->knockBack($player, 0, $dx, $dz, 0.5);
 		}
 	
 
