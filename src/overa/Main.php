@@ -44,6 +44,7 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\Listener;
 
 use pocketmine\entity\Effect;
+use pocketmine\entity\EffectInstance;
 
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
