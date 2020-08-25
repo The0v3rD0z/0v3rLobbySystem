@@ -154,7 +154,7 @@ public function onInteract(PlayerInteractEvent $ev){
 		
 	}
 	
-	if ($player->getInventory()->getItemInHand()->getId() === 351, 1, 1){
+	if ($player->getInventory()->getItemInHand()->getId() === (351, 1, 1)){
 		
 		$player->getInventory()->clearAll();
 		$player->getInventory()->setItem(0, Item::get(381)->setCustomName("§r§aProfile"));
