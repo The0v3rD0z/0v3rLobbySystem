@@ -226,14 +226,8 @@ public function onInteract(PlayerInteractEvent $ev){
                 $tnt = Entity::createEntity("PrimedTNT", $player->getLevel(), $nbt, null);
                 $tnt->setMotion($tnt->getMotion()->multiply(2));
                 $tnt->spawnTo($player);
-                $this->tntCooldown[$player->getName()] = $player->getName();
-                $time = "60";
-                $this->tntCooldownTime[$player->getName()] = $time;
-            }else{
-                $player->sendMessage("§cYou can't use your gun for another ".$this->tntCooldownTime[$player->getName()]." seconds.");
             }
         }	
-		
 
 }
 	
@@ -422,22 +416,3 @@ public function Profile($player){
 }
 
 
-class CooldownTask extends PluginTask{
-
-    public function __construct($plugin){
-        $this->plugin = $plugin;
-        parent::__construct($plugin);
-    }
-  
-    public function onRun($tick){
-        foreach($this->plugin->tntCooldown as $player){
-	    if($this->plugin->tntCooldownTime[$player] <= 0){
-	        unset($this->plugin->tntCooldown[$player]);
-	        unset($this->plugin->tntCooldownTime[$player]);
-	    }else{
-	        $this->plugin->tntCooldownTime[$player]--;
-	    }
-        }
-    }
-
-}
