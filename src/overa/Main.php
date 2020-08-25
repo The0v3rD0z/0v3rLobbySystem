@@ -210,12 +210,6 @@ public function onInteract(PlayerInteractEvent $ev){
 
 }
 	
-    public function onEntityExplode(EntityExplodeEvent $event){
-        $entity = $event->getEntity();
-        if($entity instanceof PrimedTNT){
-            $event->setCancelled();
-        }
-    }	
 
 
     public function form($player){
