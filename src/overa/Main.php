@@ -203,27 +203,9 @@ public function onInteract(PlayerInteractEvent $ev){
 	
 		if ($player->getInventory()->getItemInHand()->getId() === 46){
 		
-			if(!isset($this->tntCooldown[$player->getName()])){
-                $nbt = new CompoundTag("", [
-                    "Pos" => new ListTag("Pos", [
-                        new DoubleTag("", $player->x),
-                        new DoubleTag("", $player->y + $player->getEyeHeight()),
-                        new DoubleTag("", $player->z)
-                    ]),
-                    "Motion" => new ListTag("Motion", [
-                        new DoubleTag("", -sin($player->yaw / 180 * M_PI) * cos($player->pitch / 180 * M_PI)),
-                        new DoubleTag("", -sin($player->pitch / 180 * M_PI)),
-                        new DoubleTag("", cos($player->yaw / 180 * M_PI) * cos($player->pitch / 180 * M_PI))
-                    ]),
-                    "Rotation" => new ListTag("Rotation", [
-                        new FloatTag("", $player->yaw),
-                        new FloatTag("", $player->pitch)
-                    ]),
-                ]);
-                $tnt = Entity::createEntity("PrimedTNT", $player->getLevel(), $nbt, null);
-                $tnt->setMotion($tnt->getMotion()->multiply(2));
-                $tnt->spawnTo($player);
-            }
+			entity = Entity::createEntity("PrimedTNT", $player->getLevel(), Entity::createBaseNBT($player));
+	        $entity->setMotion($player->getDirectionVector()->normalize()->multiply(2));
+	        $entity->spawnToAll();
         }	
 
 }
