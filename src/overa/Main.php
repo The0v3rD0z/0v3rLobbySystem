@@ -70,8 +70,6 @@ use pocketmine\event\entity\EntityExplodeEvent;
 
 class Main extends PluginBase implements Listener{
 
-public $tntCooldown = [ ];
-public $tntCooldownTime = [ ];
 
 	
 public function onEnable(){
@@ -79,7 +77,6 @@ public function onEnable(){
 	
 	$this->getServer()->getPluginManager()->registerEvents($this , $this);
 	
-	$this->getServer()->getScheduler()->scheduleRepeatingTask(new CooldownTask($this), 20);
 }
 
 
