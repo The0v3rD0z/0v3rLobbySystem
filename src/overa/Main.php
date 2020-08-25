@@ -169,7 +169,7 @@ public function onInteract(PlayerInteractEvent $ev){
 		
 		$player->getInventory()->clearAll();
 		$player->getInventory()->setItem(0, Item::get(288)->setCustomName("§r§bBird Knockback"));
-		$player->getInventory()->setItem(1, Item::get(46)->setCustomName("§r§6Throw TNT"));
+		$player->getInventory()->setItem(1, Item::get(46)->setCustomName("§r§6Coming Soon"));
 		$player->getInventory()->setItem(8, Item::get(401)->setCustomName("§r§cRetour"));
 		
 	}
@@ -202,10 +202,10 @@ public function onInteract(PlayerInteractEvent $ev){
 	
 	
 		if ($player->getInventory()->getItemInHand()->getId() === 46){
-		
-			entity = Entity::createEntity("PrimedTNT", $player->getLevel(), Entity::createBaseNBT($player));
-	        $entity->setMotion($player->getDirectionVector()->normalize()->multiply(2));
-	        $entity->spawnToAll();
+			$player->sendMessage(" ==============");
+			$player->sendMessage("|| §cCOMING §r||");
+			$player->sendMessage("||§e SOON     ||");
+			$player->sendMessage(" ==============");
         }	
 
 }
