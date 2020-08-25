@@ -188,7 +188,6 @@ public function onInteract(PlayerInteractEvent $ev){
 			}
 			$player->knockBack($player, 0, $dx, $dz, $this->config->get('BoostPower'));
 		}
-	}
 	
 
 }
