@@ -177,15 +177,13 @@ public function onInteract(PlayerInteractEvent $ev){
 		$level = $player->getLevel();
 			$direction = $player->getDirectionVector();
 			$dx = $direction->getX();
-			$dz = $direction->getZ();
-			if($this->config->get("Particle") == "true"){
+			$dz = $direction->getZ();		
 				$level->addParticle(new FlameParticle($player));
 				$level->addParticle(new FlameParticle(new Vector3($x-0.3, $y, $z)));
 				$level->addParticle(new FlameParticle(new Vector3($x, $y, $z-0.3)));
 				$level->addParticle(new FlameParticle(new Vector3($x+0.3, $y, $z)));
-				$level->addParticle(new FlameParticle(new Vector3($x, $y, $z+0.3)));
-			}
-			$player->knockBack($player, 0, $dx, $dz, $this->config->get('BoostPower'));
+				$level->addParticle(new FlameParticle(new Vector3($x, $y, $z+0.3)));			
+			$player->knockBack($player, 0, $dx, $dz, 3);
 		}
 	
 
