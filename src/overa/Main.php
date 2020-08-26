@@ -105,11 +105,11 @@ public function onJoinPlayer(PlayerJoinEvent $event){
 	$player->addSubTitle("§c Noctalia");
 	
 
-   $player->getInventory()->setItem(0, Item::get(381)->setCustomName("§r§aProfile"));
-   $player->getInventory()->setItem(2, Item::get(341)->setCustomName("§r§dGadgets"));
-   $player->getInventory()->setItem(4, Item::get(345)->setCustomName("§r§6Compass"));
-   $player->getInventory()->setItem(8, Item::get(130)->setCustomName("§r§5Cosmetics"));
-   $player->getInventory()->setItem(6, Item::get(399)->setCustomName("§r§aParticules"));
+   $player->getInventory()->setItem(0, Item::get(381)->setCustomName("§r§aProfile §r§7[use]"));
+   $player->getInventory()->setItem(2, Item::get(341)->setCustomName("§r§dGadgets §7[use]"));
+   $player->getInventory()->setItem(4, Item::get(345)->setCustomName("§r§6Compass §7[use]"));
+   $player->getInventory()->setItem(8, Item::get(130)->setCustomName("§r§5Cosmetics §7[use]"));
+   $player->getInventory()->setItem(6, Item::get(399)->setCustomName("§r§aParticules §7[use]"));
 	
    $player->setXpLevel("2020");
    $player->setFood("20");
@@ -245,7 +245,7 @@ public function onInteract(PlayerInteractEvent $ev){
         $form->addButton("§l§2Size");
         $form->addButton("§l§dSpeed");
 	$form->addButton("§l§7[§aTAG§7]");
-	$form->addButton("§4§lEXIT");
+	$form->addButton("§4§lEXIT",0,"textures/blocks/barrier");
         $form->sendToPlayer($player);
 	    return $form;
 
@@ -277,7 +277,7 @@ public function Fly($player){
         $form->setTitle("§r§5Cosmetics Fly");
         $form->addButton("§l§aFly ON");
         $form->addButton("§l§cFly OFF");
-	$form->addButton("§4§lEXIT");
+	$form->addButton("§4§lEXIT",0,"textures/blocks/barrier");
         $form->sendToPlayer($player);
 	    return $form;
 
@@ -315,7 +315,7 @@ public function Size($player){
         $form->addButton("§l§c Grande Taille");
         $form->addButton("§l§6Moyenne Taille");
 	$form->addButton("§a§lPetite Taille");
-	$form->addButton("§4§lEXIT");
+	$form->addButton("§4§lEXIT",0,"textures/blocks/barrier");
         $form->sendToPlayer($player);
 	    return $form;
 
@@ -350,7 +350,7 @@ public function Speed($player){
         $form->setTitle("§r§5Cosmetics Speed");
         $form->addButton("§l§aSpeed ON");
         $form->addButton("§l§cSpeed OFF");
-	$form->addButton("§4§lEXIT");
+	$form->addButton("§4§lEXIT",0,"textures/blocks/barrier");
         $form->sendToPlayer($player);
 	    return $form;
 
@@ -383,7 +383,7 @@ public function Profile($player){
         $form->addButton("§l§6In Dev 1");
         $form->addButton("§l§2In Dev 2");
         $form->addButton("§l§dIn Dev 3");
-	$form->addButton("§4§lEXIT");
+	$form->addButton("§4§lEXIT",0,"textures/blocks/barrier");
         $form->sendToPlayer($player);
 	    return $form;
 
