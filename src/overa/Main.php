@@ -241,10 +241,10 @@ public function onInteract(PlayerInteractEvent $ev){
             }
         });
         $form->setTitle("§r§5Cosmetics");
-        $form->addButton("§l§6Fly");
-        $form->addButton("§l§2Size");
-        $form->addButton("§l§dSpeed");
-	$form->addButton("§l§7[§aTAG§7]");
+        $form->addButton("§l§6Fly",0,"textures/items/elytra");
+        $form->addButton("§l§2Size",0,"textures/items/totem");
+        $form->addButton("§l§dSpeed",0,"textures/items/potion_bottle_splash_moveSpeed");
+	$form->addButton("§l§7[§aTAG§7]",0,"textures/items/name_tag");
 	$form->addButton("§4§lEXIT",0,"textures/blocks/barrier");
         $form->sendToPlayer($player);
 	    return $form;
