@@ -203,8 +203,8 @@ public function onInteract(PlayerInteractEvent $ev){
 	
 		if ($player->getInventory()->getItemInHand()->getId() === 46){
 			$player->sendMessage(" ==============");
-			$player->sendMessage("|| §cCOMING §r||");
-			$player->sendMessage("||§e SOON     ||");
+			$player->sendMessage("||  §cCOMING §r||");
+			$player->sendMessage("||§e SOON    §r ||");
 			$player->sendMessage(" ==============");
         }	
 
