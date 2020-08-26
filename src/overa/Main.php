@@ -109,7 +109,7 @@ public function onJoinPlayer(PlayerJoinEvent $event){
    $player->getInventory()->setItem(2, Item::get(341)->setCustomName("§r§dGadgets"));
    $player->getInventory()->setItem(4, Item::get(345)->setCustomName("§r§6Compass"));
    $player->getInventory()->setItem(8, Item::get(130)->setCustomName("§r§5Cosmetics"));
-   $player->getInventory()->setItem(6, Item::get(399)->setCustomName("§r§aInfo"));
+   $player->getInventory()->setItem(6, Item::get(399)->setCustomName("§r§aParticules"));
 	
    $player->setXpLevel("2020");
    $player->setFood("20");
@@ -233,12 +233,18 @@ public function onInteract(PlayerInteractEvent $ev){
 		    case 2:
                         $this->Speed($player);
                     break;
+	
+		    case 3:
+			   $player->sendMessage("§7Le Menu des Tags §l§6Arrive Bientot"); 
+		    break;
+			   
             }
         });
         $form->setTitle("§r§5Cosmetics");
         $form->addButton("§l§6Fly");
         $form->addButton("§l§2Size");
         $form->addButton("§l§dSpeed");
+	$form->addButton("§l§7[§aTAG§7]");
 	$form->addButton("§4§lEXIT");
         $form->sendToPlayer($player);
 	    return $form;
